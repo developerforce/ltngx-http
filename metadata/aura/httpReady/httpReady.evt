@@ -1,0 +1,1 @@
+<aura:event type="COMPONENT" description="Indicates that the http component is ready for use." access="GLOBAL"/>

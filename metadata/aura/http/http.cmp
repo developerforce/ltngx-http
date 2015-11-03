@@ -1,0 +1,28 @@
+<aura:component access="GLOBAL">
+	<aura:attribute name="url" type="String" access="GLOBAL" description="The HTTP endpoint to call, with leading slash indicating relative"/>
+	<aura:attribute name="method" type="String" access="GLOBAL" default="GET" description="HTTP method to use, GET, PUT, POST, DELETE, etc."/>
+	<aura:attribute name="params" type="Object" access="GLOBAL" description="The parameters to send as key/value pairs. May be a Map, Object, String Array, or comma-delimited String."/>
+	<aura:attribute name="headers" type="Object" access="GLOBAL" description="HTTP request headers to send as key/value pairs. May be a Map, Object, String Array, or comma-delimited String." default="Accept: application/json, Content-Type: application/json"/>
+	<aura:attribute name="responseType" type="String" access="GLOBAL" default="json" description="The expected HTTP response type."/>
+	<aura:attribute name="reqbody" type="Object" access="GLOBAL" description="The body to send for POST"/>
+	<aura:attribute name="storable" type="Boolean" access="GLOBAL" default="true" description="Controls the caching of the response (default: true)"/>
+	<aura:attribute name="auto" type="Boolean" access="GLOBAL" default="false" description="Request is performed if true (default: false)"/>
+	<aura:attribute name="execute" type="Object" access="GLOBAL" description="Used to trigger execution."/>
+	<aura:registerEvent name="ready" type="c:httpReady" access="GLOBAL"/>
+
+    <aura:attribute name="config" type="Object" description="The config used for xhr requests"/>
+	<aura:attribute name="vf_origin_url" type="String" description="The origin of the VF frame"/>
+
+	<aura:registerEvent name="success" type="c:httpResponse" access="GLOBAL"/>
+	<aura:registerEvent name="error" type="c:httpResponse" access="GLOBAL"/>
+
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+
+	<aura:handler name="change" value="{!v.url}" action="{!c.handleValueChange}" />
+	<aura:handler name="change" value="{!v.method}" action="{!c.handleValueChange}" />
+	<aura:handler name="change" value="{!v.params}" action="{!c.handleValueChange}" />
+	<aura:handler name="change" value="{!v.headers}" action="{!c.handleValueChange}" />
+	<aura:handler name="change" value="{!v.reqbody}" action="{!c.handleValueChange}" />
+	<aura:handler name="change" value="{!v.execute}" action="{!c.execute}" />
+  
+</aura:component>
